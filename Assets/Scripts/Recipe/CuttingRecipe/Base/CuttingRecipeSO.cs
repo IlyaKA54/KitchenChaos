@@ -1,6 +1,6 @@
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "New cutting recipe", menuName = "Cutting recipe/Create new cutting recipe", order = 51)]
+[CreateAssetMenu(fileName = "New cutting recipe", menuName = "Recipe/Create new cutting recipe", order = 51)]
 public class CuttingRecipeSO : ScriptableObject
 {
     [SerializeField] private KitchenObjectSO _inputKitchenObject;

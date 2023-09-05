@@ -8,6 +8,8 @@ public class PlateKitchenObject : KitchenObject
 
     private List<KitchenObject> _ingredients;
 
+    public List<KitchenObject> Ingredients => _ingredients;
+
     public event UnityAction<KitchenObject> IngredientAdded;
 
     private void Awake()

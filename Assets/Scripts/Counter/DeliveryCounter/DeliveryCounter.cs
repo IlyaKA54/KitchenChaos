@@ -9,8 +9,6 @@ public class DeliveryCounter : Counter
                 KitchenObject kitchenObject;
 
                 CurrentUser.GiveAndResetKitchenObject(out kitchenObject);
-
-                kitchenObject.Destroy();
             }
         }
     }

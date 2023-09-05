@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.18028378, g: 0.22571412, b: 0.30692285, a: 1}
+  m_IndirectSpecularColor: {r: 0.18028334, g: 0.22571328, b: 0.3069217, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -1367,7 +1367,11 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 5667318490259857742, guid: 8dda30fbd55811d4ba60dbe9c90fabee,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 2102691080}
   m_SourcePrefab: {fileID: 100100000, guid: 8dda30fbd55811d4ba60dbe9c90fabee, type: 3}
 --- !u!1001 &604490168
 PrefabInstance:
@@ -1798,6 +1802,12 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 3553383961807394204, guid: 8b9a85bd4f5f6fd43be31d11c314872c,
     type: 3}
   m_PrefabInstance: {fileID: 1529329812}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &932054401 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5667318490259857742, guid: 8dda30fbd55811d4ba60dbe9c90fabee,
+    type: 3}
+  m_PrefabInstance: {fileID: 592784181}
   m_PrefabAsset: {fileID: 0}
 --- !u!4 &950063187 stripped
 Transform:
@@ -2624,7 +2634,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &1307783095
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3442,6 +3452,21 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 592784181}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &2102691080
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 932054401}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 96225f05ef519d844a95407e57083eec, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _menuSO: {fileID: 11400000, guid: 2cc7c6c2a298c114387858cc6305a2dd, type: 2}
+  _maxNumberOfRecipes: 4
+  _recipeSpawnDelay: 2
 --- !u!1 &2132098274 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 868442532049472991, guid: c22049ec5990d994eac907a5092a68ae,
