@@ -36,24 +36,45 @@ public class DeliveryManager : MonoBehaviour
         }
     }
 
-    public void DeliveredMeal(PlateKitchenObject plateKitchen)
+    public bool DeliveredMeal(PlateKitchenObject plateKitchen)
     {
         foreach (var recipe in _waitingRecipes)
         {
             if(plateKitchen.Ingredients.Count == recipe.Ingredients.Count)
             {
                 int index = 0;
+                int count = recipe.Ingredients.Count;
 
-                foreach (var kitchenObjectSO in recipe.Ingredients)
+                foreach (var inredient in recipe.Ingredients)
                 {
-                    if (plateKitchen.Ingredients[index].CompareKitchenObject(kitchenObjectSO))
-                    {
+                    if (CheckIngredient(plateKitchen.Ingredients[index], recipe.Ingredients))
                         index++;
-                        continue;
-                    }
+                    else
+                        break;
                 }
+
+                if(plateKitchen.Ingredients.Count == index)
+                {
+                    Debug.Log(recipe.ToString());
+                    _waitingRecipes.Remove(recipe);
+                    return true;
+                }
+
             }
         }
+
+        return false;
+    }
+
+    private bool CheckIngredient(KitchenObject kitchenObject, List<KitchenObjectSO> kitchenObjects)
+    {
+        foreach(var obj in kitchenObjects)
+        {
+            if(kitchenObject.CompareKitchenObject(obj))
+                return true;
+        }
+
+        return false;
     }
 
 }
