@@ -1,6 +1,8 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class DeliveryManager : MonoBehaviour
 {
@@ -8,10 +10,10 @@ public class DeliveryManager : MonoBehaviour
     [SerializeField] private int _maxNumberOfRecipes;
     [SerializeField] private float _recipeSpawnDelay;
 
-
     private List<CompleteProductRecipeSO> _waitingRecipes;
     private float _accamulatedTime;
 
+    public event UnityAction<CompleteProductRecipeSO> _recipeAdde;
     private void Start()
     {
         _waitingRecipes = new List<CompleteProductRecipeSO>();
@@ -31,7 +33,7 @@ public class DeliveryManager : MonoBehaviour
 
                 _waitingRecipes.Add(newRecipe);
 
-                Debug.Log(newRecipe.ToString());
+                _recipeAdde?.Invoke(newRecipe);
             }
         }
     }
@@ -42,21 +44,12 @@ public class DeliveryManager : MonoBehaviour
         {
             if(plateKitchen.Ingredients.Count == recipe.Ingredients.Count)
             {
-                int index = 0;
-                int count = recipe.Ingredients.Count;
+                var check = CompareWithRecipe(plateKitchen.Ingredients, recipe);
 
-                foreach (var inredient in recipe.Ingredients)
+                if(plateKitchen.Ingredients.Count == check)
                 {
-                    if (CheckIngredient(plateKitchen.Ingredients[index], recipe.Ingredients))
-                        index++;
-                    else
-                        break;
-                }
-
-                if(plateKitchen.Ingredients.Count == index)
-                {
-                    Debug.Log(recipe.ToString());
                     _waitingRecipes.Remove(recipe);
+
                     return true;
                 }
 
@@ -64,6 +57,22 @@ public class DeliveryManager : MonoBehaviour
         }
 
         return false;
+    }
+
+    private int CompareWithRecipe(List<KitchenObject> plateKitchen, CompleteProductRecipeSO completeRecipe)
+    {
+        int count = plateKitchen.Count;
+        int index = 0;
+
+        for (int i = 0; i < count; i++)
+        {
+            if (CheckIngredient(plateKitchen[index], completeRecipe.Ingredients))
+                index++;
+            else
+                break;
+        }
+
+        return index;
     }
 
     private bool CheckIngredient(KitchenObject kitchenObject, List<KitchenObjectSO> kitchenObjects)
