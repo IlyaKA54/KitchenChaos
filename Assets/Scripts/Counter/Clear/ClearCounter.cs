@@ -30,7 +30,8 @@ public class ClearCounter : Counter
             }
             else
             {
-                GiveKitchenObject();
+                if(!CurrentUser.HasKitchenObject) 
+                    GiveKitchenObject();
             }
 
         }

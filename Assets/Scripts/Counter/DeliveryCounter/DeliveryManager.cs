@@ -13,7 +13,8 @@ public class DeliveryManager : MonoBehaviour
     private List<CompleteProductRecipeSO> _waitingRecipes;
     private float _accamulatedTime;
 
-    public event UnityAction<CompleteProductRecipeSO> _recipeAdde;
+    public event UnityAction<CompleteProductRecipeSO> RecipeAdde;
+    public event UnityAction<CompleteProductRecipeSO> RecipeRemoved;
     private void Start()
     {
         _waitingRecipes = new List<CompleteProductRecipeSO>();
@@ -33,7 +34,7 @@ public class DeliveryManager : MonoBehaviour
 
                 _waitingRecipes.Add(newRecipe);
 
-                _recipeAdde?.Invoke(newRecipe);
+                RecipeAdde?.Invoke(newRecipe);
             }
         }
     }
@@ -48,6 +49,8 @@ public class DeliveryManager : MonoBehaviour
 
                 if(plateKitchen.Ingredients.Count == check)
                 {
+                    RecipeRemoved?.Invoke(recipe);
+
                     _waitingRecipes.Remove(recipe);
 
                     return true;

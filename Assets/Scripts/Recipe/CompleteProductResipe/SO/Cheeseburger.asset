@@ -14,6 +14,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _ingredients:
   - {fileID: 11400000, guid: e87be9a7a7f6d924390551ed111293a4, type: 2}
-  - {fileID: 11400000, guid: f27e2f1f1cf005c4eb26d4943ff93cd7, type: 2}
+  - {fileID: 11400000, guid: 434e9908e7c42004e99544d735d584d4, type: 2}
   - {fileID: 11400000, guid: ed4cfa2bf37f1a045b3eea8a9fc27a75, type: 2}
   _label: CheeseBurger

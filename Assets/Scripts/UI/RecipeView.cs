@@ -3,32 +3,49 @@ using UnityEngine;
 
 public class RecipeView : MonoBehaviour
 {
-    [SerializeField] private RecipeTemplate _template;
+    [SerializeField] private RecipeTemplateUI _template;
     [SerializeField] private DeliveryManager _deliveryManager;
 
-    private List<RecipeTemplate> _recipes;
+    private List<RecipeTemplateUI> _recipes;
 
     private void OnEnable()
     {
-        _deliveryManager._recipeAdde += OnRecipeAdde;
+        _deliveryManager.RecipeAdde += OnRecipeAdde;
+        _deliveryManager.RecipeRemoved += OnRecipeRemoved;
     }
 
     private void OnDisable()
     {
-        _deliveryManager._recipeAdde -= OnRecipeAdde;
+        _deliveryManager.RecipeAdde -= OnRecipeAdde;
+        _deliveryManager.RecipeRemoved -= OnRecipeRemoved;
     }
     private void Start()
     {
-        _template = new RecipeTemplate();
+        _recipes = new List<RecipeTemplateUI>();
     }
 
     private void OnRecipeAdde(CompleteProductRecipeSO completeProduct)
     {
-        //var newRecipeView = Instantiate(_template, transform);
+        var newRecipeView = Instantiate(_template, transform);
 
-        //newRecipeView.SetText(completeProduct.Label);
+        newRecipeView.SetRecipe(completeProduct);
 
-        //_recipes.Add(newRecipeView);
+        _recipes.Add(newRecipeView);
+    }
+
+    private void OnRecipeRemoved(CompleteProductRecipeSO completeProduct)
+    {
+        foreach (var recipe in _recipes)
+        {
+            if(recipe.CompareResipes(completeProduct))
+            {
+                recipe.Destroy();
+
+                _recipes.Remove(recipe);
+
+                break;
+            }
+        }
     }
 
 }
