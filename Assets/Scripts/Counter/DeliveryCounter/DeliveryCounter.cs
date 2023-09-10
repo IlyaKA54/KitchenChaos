@@ -1,21 +1,35 @@
 using UnityEngine;
+using UnityEngine.Events;
 
 public class DeliveryCounter : Counter
 {
     [SerializeField] private DeliveryManager _manager;
+
+    public event UnityAction MealDelivered;
+    public event UnityAction MistakeMaded;
     public override void Interact()
     {
         if (CurrentUser.HasKitchenObject && CurrentUser.KitchenObject is PlateKitchenObject plate)
         {
-            if(_manager.DeliveredMeal(plate))
-            {
-                KitchenObject kitchenObject;
 
-                CurrentUser.GiveAndResetKitchenObject(out kitchenObject);
+            var check = _manager.DeliveredMeal(plate);
 
-                kitchenObject.Destroy();
-            }
-           
+            ResetKitchenObject();
+
+            if (check)
+                MealDelivered?.Invoke();
+            else
+                MistakeMaded?.Invoke();
+            
         }
+    }
+
+    private void ResetKitchenObject()
+    {
+        KitchenObject kitchenObject;
+
+        CurrentUser.GiveAndResetKitchenObject(out kitchenObject);
+
+        kitchenObject.Destroy();
     }
 }
