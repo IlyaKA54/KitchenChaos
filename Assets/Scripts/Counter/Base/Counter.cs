@@ -7,7 +7,6 @@ public abstract class Counter : MonoBehaviour
     [SerializeField] protected Transform SpawnPoint;
 
     protected Player CurrentUser;
-
     public void InitAndChangeState(Player user)
     {
         CurrentUser = user;
@@ -23,5 +22,4 @@ public abstract class Counter : MonoBehaviour
     }
 
     public abstract void Interact();
-
 }

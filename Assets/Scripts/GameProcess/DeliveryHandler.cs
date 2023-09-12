@@ -7,14 +7,16 @@ public class DeliveryHandler : MonoBehaviour
     [SerializeField] private int _numberOfMistakes;
 
     private int _currentMistakes;
-    private int _deliveredMeals;
 
-    public event UnityAction<int> GameEnded;
+    public int DeliveredMeals { get; private set; }
+
+    public event UnityAction GameEnded;
+    public event UnityAction TimeUpped;
 
     private void Start()
     {
         _currentMistakes = 0;
-        _deliveredMeals = 0;
+        DeliveredMeals = 0;
     }
 
     private void OnEnable()
@@ -30,19 +32,16 @@ public class DeliveryHandler : MonoBehaviour
     }
     private void OnDeliverdMeal()
     {
-        _deliveredMeals++;
-
-        Debug.Log(_deliveredMeals);
+        DeliveredMeals++;
+        TimeUpped?.Invoke();
     }
 
     private void OnAddMistake()
     {
         _currentMistakes++;
 
-        Debug.Log(_currentMistakes);
-
-        //if(_currentMistakes >= _numberOfMistakes)
-        //    GameEnded?.Invoke(_deliverdMeals);
+        if (_currentMistakes >= _numberOfMistakes)
+            GameEnded?.Invoke();
 
     }
 }
