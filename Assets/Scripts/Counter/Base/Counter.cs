@@ -9,9 +9,12 @@ public abstract class Counter : MonoBehaviour
     protected Player CurrentUser;
     public void InitAndChangeState(Player user)
     {
-        CurrentUser = user;
+        if (CurrentUser == null)
+        {
+            CurrentUser = user;
 
-        _selectedCounter.ChangeState(true);
+            _selectedCounter.ChangeState(true);
+        }
     }
 
     public void ResetUser()

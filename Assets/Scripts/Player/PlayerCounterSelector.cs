@@ -20,7 +20,7 @@ public class PlayerCounterSelector : MonoBehaviour
 
     private void Update()
     {
-        if (Physics.Raycast(transform.position, transform.forward, out RaycastHit raycastHit, _interactionDistance) && _isStartingGame)
+        if (_isStartingGame && Physics.Raycast(transform.position, transform.forward, out RaycastHit raycastHit, _interactionDistance))
         {
             if (raycastHit.transform.TryGetComponent(out Counter counter))
             {
@@ -44,7 +44,6 @@ public class PlayerCounterSelector : MonoBehaviour
         {
             _currentInteractingCounter.ResetUser();
             _currentInteractingCounter = null;
-
         }
     }
 
